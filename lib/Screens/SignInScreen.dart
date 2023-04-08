@@ -3,12 +3,12 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class LoginPage extends StatefulWidget {
+class SignInScreen extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _SignInScreenState createState() => _SignInScreenState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignInScreenState extends State<SignInScreen> {
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 

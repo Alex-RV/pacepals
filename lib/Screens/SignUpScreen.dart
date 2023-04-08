@@ -3,14 +3,26 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class LoginPage extends StatefulWidget {
+class SignUpScreen extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _SignUpScreenState createState() => _SignUpScreenState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
+
+  void _handleLogin() {
+    String userName = nameController.text;
+    String password = passwordController.text;
+
+    // validation and login logic here
+
+    print("User Name: $userName");
+    print("Password: $password");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +42,9 @@ class _LoginPageState extends State<LoginPage> {
               alignment: Alignment.center,
               child: Scaffold(
                   backgroundColor: Colors.transparent,
-                  body: Column(
+                  body: Form(
+                  key: _formKey,
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
@@ -41,10 +55,16 @@ class _LoginPageState extends State<LoginPage> {
                             'Sign Up',
                             style: TextStyle(fontSize: 24, color: Colors.white),
                           )),
-                    // User Name Text Field
+                      // User Name Text Field
                       Container(
                         padding: const EdgeInsets.all(10),
-                        child: TextField(
+                        child: TextFormField(
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter some text';
+                            }
+                            return null;
+                          },
                           controller: nameController,
                           style: const TextStyle(
                             color: Colors.white, // text color
@@ -67,10 +87,16 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                       ),
-                    // Password Text Field
+                      // Password Text Field
                       Container(
                         padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                        child: TextField(
+                        child: TextFormField(
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter some text';
+                            }
+                            return null;
+                          },
                           obscureText: true,
                           controller: passwordController,
                           style: const TextStyle(
@@ -94,8 +120,49 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                       ),
+                      ElevatedButton(
+                        onPressed: () {
+                          String username = nameController.text.trim();
+                          String password = passwordController.text.trim();
+                          if (_formKey.currentState!.validate()) {
+                          _handleLogin();
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Processing Data')),
+                          );
+                          }
+                          
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF1DB954),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+                        ),
+                        child: const Text(
+                          'Sign Up',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+
+
+                      TextButton(
+                        onPressed: () {
+                          //forgot password screen
+                        },
+                        child: const Text(
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                          "Already have an account, Sign In",
+                        ),
+                      ),
                     ],
-                  ))),
+                  )))),
         ),
       ),
     ]);

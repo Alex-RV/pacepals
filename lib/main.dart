@@ -21,6 +21,6 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(primarySwatch: Colors.blue),
-        home: isLoggedIn == false ? LoginPage() : const HomeScreen());
+        home: isLoggedIn == false ? SignInScreen() : const HomeScreen());
   }
 }
