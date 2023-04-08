@@ -39,6 +39,13 @@ pub struct AILoginAuth {
     password: String,
 }
 
+pub fn get_with_session(
+    AppState { user_sessions, .. }: &AppState,
+    sid: SessionId,
+) -> Option<UserId> {
+    user_sessions.0.get(&sid).cloned()
+}
+
 fn create_user_hash(email: &str, password: &str) -> String {
     digest(String::from(email) + password)
 }

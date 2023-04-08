@@ -1,4 +1,4 @@
-import './def.dart';
+import '../def.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
