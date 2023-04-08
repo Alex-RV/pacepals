@@ -13,12 +13,12 @@ class AOLoginAuth {
 }
 
 class AILoginAuth {
-  final String username;
+  final String email;
   final String password;
 
-  AILoginAuth(this.username, this.password);
+  AILoginAuth(this.email, this.password);
   Map<String, dynamic> toJson() => {
-        'username': username,
+        'email': email,
         'password': password,
       };
 }

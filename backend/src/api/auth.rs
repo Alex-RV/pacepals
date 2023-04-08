@@ -1,8 +1,8 @@
 use super::*;
+use serde::{Deserialize, Serialize};
 use sha256::digest;
 use std::collections::HashMap;
 use uuid::Uuid;
-use serde::{Serialize, Deserialize};
 
 #[derive(Default)]
 pub struct UserSessions(HashMap<SessionId, UserId>);
@@ -12,7 +12,7 @@ pub struct UsersAuths(HashMap<UserId, UserAuthStore>);
 
 #[derive(Serialize, Deserialize)]
 struct UserAuthStore {
-    username: String,
+    email: String,
     hash: String,
 }
 
@@ -23,7 +23,7 @@ pub struct AOLoginSignup {
 
 #[derive(Serialize, Deserialize)]
 pub struct AILoginSignup {
-    username: String,
+    email: String,
     password: String,
 }
 
@@ -35,12 +35,12 @@ pub struct AOLoginAuth {
 
 #[derive(Serialize, Deserialize)]
 pub struct AILoginAuth {
-    username: String,
+    email: String,
     password: String,
 }
 
-fn create_user_hash(username: &str, password: &str) -> String {
-    digest(String::from(username) + password)
+fn create_user_hash(email: &str, password: &str) -> String {
+    digest(String::from(email) + password)
 }
 
 pub fn api_login_signup(
@@ -50,14 +50,14 @@ pub fn api_login_signup(
     if !user_auths
         .0
         .values()
-        .any(|auth_store| auth_store.username == req.username)
+        .any(|auth_store| auth_store.email == req.email)
     {
         let uid = Uuid::new_v4().to_string();
         user_auths.0.insert(
             uid.clone(),
             UserAuthStore {
-                hash: create_user_hash(&req.username, &req.password),
-                username: req.username,
+                hash: create_user_hash(&req.email, &req.password),
+                email: req.email,
             },
         );
         Some(AOLoginSignup { uid })
@@ -77,7 +77,7 @@ pub fn api_login_auth(
     if let Some((uid, _)) = user_auths
         .0
         .iter()
-        .find(|(_, auth_store)| auth_store.hash == create_user_hash(&req.username, &req.username))
+        .find(|(_, auth_store)| auth_store.hash == create_user_hash(&req.email, &req.email))
     {
         let sid = Uuid::new_v4().to_string();
         user_sessions.0.insert(sid.clone(), uid.clone());

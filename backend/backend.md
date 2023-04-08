@@ -88,7 +88,7 @@ Events:
 /api/login/signup
 
 in:
-    username: String,
+    email: String,
     password: String,
 
 out:
@@ -97,7 +97,7 @@ out:
 /api/login/auth
 
 in:
-    username: String,
+    email: String,
     password: String,
 
 out:

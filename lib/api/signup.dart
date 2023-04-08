@@ -10,12 +10,12 @@ class AOLoginSignup {
 }
 
 class AILoginSignup {
-  final String username;
+  final String email;
   final String password;
 
-  AILoginSignup(this.username, this.password);
+  AILoginSignup(this.email, this.password);
   Map<String, dynamic> toJson() => {
-        'username': username,
+        'email': email,
         'password': password,
       };
 }
