@@ -21,8 +21,8 @@ class HomeScreen extends StatelessWidget {
             height: 200,
             child: Column(
               children: <Widget>[
-                const Text('Deliver features faster'),
-                const Text('Craft beautiful UIs'),
+                const Text('Recommended'),
+                
                 Container(),
               ],
             ),
