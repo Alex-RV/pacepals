@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import 'SignUpScreen.dart';
+
 class SignInScreen extends StatefulWidget {
   @override
   _SignInScreenState createState() => _SignInScreenState();
@@ -149,16 +151,26 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                       ),
 
-
-                      TextButton(
-                        onPressed: () {
-                          //forgot password screen
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => SignUpScreen()),
+                          );
                         },
-                        child: const Text(
+                        child: Text(
+                          "Don't have account, Sign Up",
                           style: TextStyle(
                             color: Colors.white,
+                            fontSize: 16,
+                            shadows: <Shadow>[
+                              Shadow(
+                                offset: Offset(1.0, 1.0),
+                                blurRadius: 3.0,
+                                color: Colors.black.withOpacity(0.3),
+                              ),
+                            ],
                           ),
-                          "Don't have account, Sign Up",
                         ),
                       ),
                     ],
