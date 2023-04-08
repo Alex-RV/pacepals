@@ -38,7 +38,7 @@ class _LoginPageState extends State<LoginPage> {
                           alignment: Alignment.center,
                           padding: const EdgeInsets.all(10),
                           child: const Text(
-                            'Sign in',
+                            'Sign Up',
                             style: TextStyle(fontSize: 24, color: Colors.white),
                           )),
                     // User Name Text Field
@@ -92,14 +92,6 @@ class _LoginPageState extends State<LoginPage> {
                               color: Colors.white, // label color when focused
                             ),
                           ),
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          //forgot password screen
-                        },
-                        child: const Text(
-                          'Forgot Password',
                         ),
                       ),
                     ],
