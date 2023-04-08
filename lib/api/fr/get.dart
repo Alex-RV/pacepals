@@ -1,30 +1,28 @@
-// import '../def.dart';
-// import '../cfg/def.dart';
-// import 'dart:convert';
-// import 'package:http/http.dart' as http;
+import '../def.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
-// class AOFriendGet {
-//     final SessionId sid;
+class AOFriendGet {
+  final List<UserId> pendingAdds;
+  final List<UserId> friends;
 
-//   AOFriendGet(this.sid);
-//   AOFriendGet.fromJson(Map<String, dynamic> json)
-//       : sid = json['sid'],
-//         config = json['config'];
-// }
+  AOFriendGet(this.pendingAdds, this.friends);
+  AOFriendGet.fromJson(Map<String, dynamic> json)
+      : pendingAdds = json['pending_adds'],
+        friends = json['friends'];
+}
 
-// class AIFriendGet {
-//   final UserId selfUId;
-//   final UserId lookupUid;
+class AIFriendGet {
+  final SessionId sid;
 
-//   AIFriendLookUp(this.selfUId, this.lookupUid);
-//   Map<String, dynamic> toJson() => {
-//         'self_uid': selfUId,
-//         'lookup_uid': lookupUid,
-//       };
-// }
+  AIFriendGet(this.sid);
+  Map<String, dynamic> toJson() => {
+        'sid': sid,
+      };
+}
 
-// Future<AOFriendLookUp> apiLoginAuth(AIFriendLookUp req) async {
-//   var url = Uri.https('pacepals-96.shuttleapp.rs', '/api/login/auth');
-//   var response = await http.post(url, body: req.toJson());
-//   return AOFriendLookUp.fromJson(jsonDecode(response.body));
-// }
+Future<AOFriendGet> apiFriendsLookUp(AIFriendGet req) async {
+  var url = Uri.https('pacepals-96.shuttleapp.rs', '/api/fr/get');
+  var response = await http.post(url, body: req.toJson());
+  return AOFriendGet.fromJson(jsonDecode(response.body));
+}

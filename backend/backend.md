@@ -294,6 +294,13 @@ in:
 
 [ ] /api/sch/suggest
 
+[ ] Backup DB
+
+### Debug
+
+[ ] /api/dbg/get
+[ ] /api/dbg/set
+
 ### Extra
 
 [x] /api/login/signup
@@ -304,3 +311,4 @@ in:
 [ ] /api/ev/notify_get
 [ ] /api/ev/create
 [ ] /api/ev/cancel
+
