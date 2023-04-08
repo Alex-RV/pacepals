@@ -1,12 +1,18 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'Screens/LoginScreen.dart';
+import 'Screens/HomeScreen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
+// ignore: must_be_immutable
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  bool isLoggedIn = false;
 
   // This widget is the root of your application.
   @override
@@ -15,6 +21,6 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(primarySwatch: Colors.blue),
-        home: LoginPage());
+        home: isLoggedIn == true ? LoginPage() : const HomeScreen());
   }
 }
