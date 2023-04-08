@@ -60,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
                                 borderRadius: BorderRadius.circular(10.0),
                                 borderSide: const BorderSide(
                                     color: Color.fromARGB(227, 2, 0, 0))),
-                            labelText: 'User Name',
+                            labelText: 'Email',
                             labelStyle: const TextStyle(
                               color: Colors.white, // label color when focused
                             ),
