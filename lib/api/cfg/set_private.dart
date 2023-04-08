@@ -10,7 +10,7 @@ class AIConfigSetPrivate {
   Map<String, dynamic> toJson() => {'sid': sid, 'config': config.toJson()};
 }
 
-Future<void> apiLoginAuth(AIConfigSetPrivate req) async {
+Future<void> apiConfigSetPrivate(AIConfigSetPrivate req) async {
   var url = Uri.https('pacepals-96.shuttleapp.rs', '/api/cfg/set_private');
   await http.post(url, body: req.toJson());
 }

@@ -21,17 +21,17 @@ type Directions = String;
 
 ```
 
-## Global State 
+## Global State
 
 ```
 
 BackendState:
     auth: HashMap<SessionId, UserId>,
     users: HashMap<UserId, {
-        UserAuth, 
-        ::UserConnections, 
-        UserPublicConfig, 
-        UserPrivateConfig, 
+        UserAuth,
+        UserConnections,
+        UserPublicConfig,
+        UserPrivateConfig,
     }>,
     pools: Pools,
     events: Events,
@@ -48,7 +48,7 @@ UserPrivateConfig:
     weekly_km: u32,
 
 UserConnections:
-    added: Vec<UserId>,
+    pending: Vec<UserId>,
     friends: Vec<UserId>,
 
 UserInvite:
@@ -159,8 +159,9 @@ out:
 
 /api/fr/lookup
 
-in: 
-    uid: UserId,
+in:
+    self_uid: UserId,
+    lookup_uid: UserId,
 
 out:
     is_pending: bool,
@@ -172,8 +173,14 @@ in:
     sid: SessionId,
 
 out:
-    pending: Vec<UserId>,
+    pending_adds: Vec<UserId>,
     friends: Vec<UserId>,
+
+/api/fr/add
+
+in:
+    sid: SessionId,
+    add: UserId,
 
 ```
 
@@ -194,7 +201,7 @@ out:
 in:
     sid: SessionId,
 
-out: 
+out:
     cancels: Vec<InviteId>,
     accepts: Vec<InviteId>,
     invitations: Vec<InviteId>,
@@ -247,7 +254,7 @@ out:
 in:
     sid: SessionId,
 
-out: 
+out:
     cancels: Vec<InviteId>,
 
 /api/ev/create
@@ -271,12 +278,13 @@ in:
 
 ### Core
 
-[ ] /api/cfg/get
-[ ] /api/cfg/set_public
-[ ] /api/cfg/set_private
+[x] /api/cfg/get
+[x] /api/cfg/set_public
+[x] /api/cfg/set_private
 
 [ ] /api/fr/lookup
 [ ] /api/fr/get
+[ ] /api/fr/add
 
 [ ] /api/invite/get
 [ ] /api/invite/notify_get
@@ -296,4 +304,3 @@ in:
 [ ] /api/ev/notify_get
 [ ] /api/ev/create
 [ ] /api/ev/cancel
-

@@ -15,7 +15,7 @@ pub struct UserPrivateConfig {
 }
 
 #[derive(Default)]
-pub struct UserConfigs(HashMap<UserId, (UserPublicConfig, UserPrivateConfig)>);
+pub struct UserConfigs(pub HashMap<UserId, (UserPublicConfig, UserPrivateConfig)>);
 
 pub struct AOConfigGet {
     public_config: UserPublicConfig,
