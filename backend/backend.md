@@ -45,7 +45,7 @@ UserPublicConfig:
     profile_picture: StaticAsset,
 
 UserPrivateConfig:
-    weekly_miles: u32,
+    weekly_km: u32,
 
 UserConnections:
     added: Vec<UserId>,
@@ -288,8 +288,8 @@ in:
 
 ### Extra
 
-[ ] /api/login/signup
-[ ] /api/login/auth
+[x] /api/login/signup
+[x] /api/login/auth
 
 [ ] /api/ev/list
 [ ] /api/ev/get
