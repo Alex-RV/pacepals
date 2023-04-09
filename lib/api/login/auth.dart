@@ -3,13 +3,16 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class AOLoginAuth {
+  final bool ok;
+  final String error;
   final UserId uid;
   final SessionId sid;
 
-  AOLoginAuth(this.uid, this.sid);
   AOLoginAuth.fromJson(Map<String, dynamic> json)
       : uid = json['uid'],
-        sid = json['sid'];
+        sid = json['sid'],
+        ok = json['ok'],
+        error = json['error'];
 }
 
 class AILoginAuth {

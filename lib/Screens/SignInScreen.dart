@@ -1,9 +1,11 @@
 import 'dart:ui';
-
+import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-
+import 'package:pacepals/api/cfg/get.dart';
+import 'package:pacepals/api/login/auth.dart';
 import 'SignUpScreen.dart';
+import 'HomeScreen.dart';
+import 'GetPermissionsScreen.dart';
 
 class SignInScreen extends StatefulWidget {
   @override
@@ -16,14 +18,28 @@ class _SignInScreenState extends State<SignInScreen> {
 
   final _formKey = GlobalKey<FormState>();
 
-  void _handleLogin() {
-    String userName = nameController.text;
+  void _handleLogin() async {
+    String email = nameController.text;
     String password = passwordController.text;
 
-    // validation and login logic here
-
-    print("User Name: $userName");
-    print("Password: $password");
+    try {
+      var res = await apiLoginAuth(AILoginAuth(email, password));
+      var data = await apiConfigGet(AIConfigGet(res.sid));
+      var session = SessionManager();
+      await session.set("uid", res.uid);
+      await session.set("sid", res.sid);
+      await session.set("fullname", data.publicConfig.name);
+      await session.set("email", email);
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => GetPermissionsScreen()),
+      );
+    } catch (e) {
+      print('Something went wront $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Something went wrong: $e')),
+      );
+    }
   }
 
   @override

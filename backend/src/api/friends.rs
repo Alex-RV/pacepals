@@ -10,10 +10,12 @@ pub struct UserFriends {
     friends: Vec<UserId>,
 }
 
-#[derive(Serialize, Deserialize, Clone)]
+#[derive(Serialize, Deserialize, Default, Clone)]
 pub struct AOFriendLookUp {
-    is_pending: bool,
-    config: UserPublicConfig,
+    pub ok: bool,
+    pub error: &'static str,
+    pub is_pending: bool,
+    pub config: UserPublicConfig,
 }
 
 #[derive(Serialize, Deserialize, Clone)]
@@ -22,10 +24,12 @@ pub struct AIFriendLookUp {
     lookup_uid: UserId,
 }
 
-#[derive(Serialize, Deserialize, Clone)]
+#[derive(Serialize, Deserialize, Default, Clone)]
 pub struct AOFriendGet {
-    pending_adds: Vec<UserId>,
-    friends: Vec<UserId>,
+    pub ok: bool,
+    pub error: &'static str,
+    pub pending_adds: Vec<UserId>,
+    pub friends: Vec<UserId>,
 }
 
 #[derive(Serialize, Deserialize, Clone)]
@@ -39,22 +43,36 @@ pub struct AIFriendAdd {
     add: UserId,
 }
 
-pub fn api_fr_lookup(state: &mut AppState, req: AIFriendLookUp) -> Option<AOFriendLookUp> {
-    let self_connection = state.user_connections.0.get(&req.self_uid)?;
-    let lookup_config = state.user_configs.0.get(&req.lookup_uid)?.0.clone();
+pub fn api_fr_lookup(
+    state: &mut AppState,
+    req: AIFriendLookUp,
+) -> Result<AOFriendLookUp, &'static str> {
+    let self_connection = state
+        .user_connections
+        .0
+        .get(&req.self_uid)
+        .ok_or("User is not logged in")?;
+    let lookup_config = state
+        .user_configs
+        .0
+        .get(&req.lookup_uid)
+        .ok_or("Impossible, config not defined")?
+        .0
+        .clone();
 
     let is_pending = self_connection
         .pending_sent
         .iter()
         .any(|uid| *uid == req.lookup_uid);
 
-    Some(AOFriendLookUp {
+    Ok(AOFriendLookUp {
         is_pending,
         config: lookup_config,
+        ..Default::default()
     })
 }
 
-pub fn api_fr_get(state: &mut AppState, req: AIFriendGet) -> Option<AOFriendGet> {
+pub fn api_fr_get(state: &mut AppState, req: AIFriendGet) -> Result<AOFriendGet, &'static str> {
     let uid = get_with_session(state, req.sid)?;
     let pending_adds = state
         .user_connections
@@ -73,12 +91,13 @@ pub fn api_fr_get(state: &mut AppState, req: AIFriendGet) -> Option<AOFriendGet>
 
     let friends = state.user_connections.0[&uid].friends.clone();
 
-    Some(AOFriendGet {
+    Ok(AOFriendGet {
         pending_adds,
         friends,
+        ..Default::default()
     })
 }
 
-pub fn api_fr_add(state: &mut AppState, req: AIFriendGet) -> Option<()> {
+pub fn api_fr_add(state: &mut AppState, req: AIFriendGet) -> Result<AOFriendGet, &'static str> {
     todo!()
 }
