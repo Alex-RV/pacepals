@@ -4,13 +4,16 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class AOFriendLookUp {
+  final bool ok;
+  final String error;
   final bool isPending;
   final UserPublicConfig config;
 
-  AOFriendLookUp(this.isPending, this.config);
   AOFriendLookUp.fromJson(Map<String, dynamic> json)
       : isPending = json['is_pending'],
-        config = json['config'];
+        config = json['config'],
+        ok = json['ok'],
+        error = json['error'];
 }
 
 class AIFriendLookUp {

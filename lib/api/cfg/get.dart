@@ -4,13 +4,16 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class AOConfigGet {
+  final bool ok;
+  final String error;
   UserPublicConfig publicConfig;
   UserPrivateConfig privateConfig;
 
-  AOConfigGet(this.publicConfig, this.privateConfig);
   AOConfigGet.fromJson(Map<String, dynamic> json)
       : publicConfig = json['public_config'],
-        privateConfig = json['private_config'];
+        privateConfig = json['private_config'],
+        ok = json['ok'],
+        error = json['error'];
 }
 
 class AIConfigGet {

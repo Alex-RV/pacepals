@@ -16,8 +16,10 @@ struct UserAuthStore {
     hash: String,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Default)]
 pub struct AOLoginSignup {
+    ok: bool,
+    error: &'static str,
     uid: UserId,
 }
 
@@ -27,8 +29,10 @@ pub struct AILoginSignup {
     password: String,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Default)]
 pub struct AOLoginAuth {
+    ok: bool,
+    error: &'static str,
     uid: UserId,
     sid: SessionId,
 }
@@ -42,8 +46,12 @@ pub struct AILoginAuth {
 pub fn get_with_session(
     AppState { user_sessions, .. }: &AppState,
     sid: SessionId,
-) -> Option<UserId> {
-    user_sessions.0.get(&sid).cloned()
+) -> Result<UserId, &'static str> {
+    user_sessions
+        .0
+        .get(&sid)
+        .cloned()
+        .ok_or("User is not logged in")
 }
 
 fn create_user_hash(email: &str, password: &str) -> String {
@@ -53,8 +61,8 @@ fn create_user_hash(email: &str, password: &str) -> String {
 pub fn api_login_signup(
     AppState { user_auths, .. }: &mut AppState,
     req: AILoginSignup,
-) -> Option<AOLoginSignup> {
-    eprintln!("api_login_signup");
+) -> Result<AOLoginSignup, &'static str> {
+    log::warn!("api_login_signup");
     if !user_auths
         .0
         .values()
@@ -68,9 +76,12 @@ pub fn api_login_signup(
                 email: req.email,
             },
         );
-        Some(AOLoginSignup { uid })
+        Ok(AOLoginSignup {
+            uid,
+            ..Default::default()
+        })
     } else {
-        None?
+        Err("There is already an account under this email.")
     }
 }
 
@@ -81,8 +92,8 @@ pub fn api_login_auth(
         ..
     }: &mut AppState,
     req: AILoginAuth,
-) -> Option<AOLoginAuth> {
-    eprintln!("api_login_auth");
+) -> Result<AOLoginAuth, &'static str> {
+    log::warn!("api_login_auth");
     if let Some((uid, _)) = user_auths
         .0
         .iter()
@@ -90,11 +101,12 @@ pub fn api_login_auth(
     {
         let sid = Uuid::new_v4().to_string();
         user_sessions.0.insert(sid.clone(), uid.clone());
-        Some(AOLoginAuth {
+        Ok(AOLoginAuth {
             uid: uid.clone(),
             sid,
+            ..Default::default()
         })
     } else {
-        None
+        Err("This user does exist")
     }
 }

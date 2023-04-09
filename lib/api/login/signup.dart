@@ -3,10 +3,14 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class AOLoginSignup {
+  final bool ok;
+  final String error;
   final UserId uid;
 
-  AOLoginSignup(this.uid);
-  AOLoginSignup.fromJson(Map<String, dynamic> json) : uid = json['uid'];
+  AOLoginSignup.fromJson(Map<String, dynamic> json)
+      : uid = json['uid'],
+        ok = json['ok'],
+        error = json['error'];
 }
 
 class AILoginSignup {

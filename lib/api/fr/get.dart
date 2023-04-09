@@ -3,13 +3,16 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class AOFriendGet {
+  final bool ok;
+  final String error;
   final List<UserId> pendingAdds;
   final List<UserId> friends;
 
-  AOFriendGet(this.pendingAdds, this.friends);
   AOFriendGet.fromJson(Map<String, dynamic> json)
       : pendingAdds = json['pending_adds'],
-        friends = json['friends'];
+        friends = json['friends'],
+        ok = json['ok'],
+        error = json['error'];
 }
 
 class AIFriendGet {
@@ -27,6 +30,7 @@ Future<AOFriendGet> apiFriendsLookUp(AIFriendGet req) async {
     "Accept": "application/json",
     "Content-Type": "application/json",
   };
-  var response = await http.post(url, body: jsonEncode(req.toJson()), headers: headers);
+  var response =
+      await http.post(url, body: jsonEncode(req.toJson()), headers: headers);
   return AOFriendGet.fromJson(jsonDecode(response.body));
 }
