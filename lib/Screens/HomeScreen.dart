@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_maps/google_maps_places.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:pacepals/api/sch/suggest.dart' as suggest;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -19,6 +22,20 @@ class _HomePageState extends State<HomeScreen> {
 
   late GoogleMapController mapController;
   Set<Marker> _markers = {};
+
+    List<PlaceResult> nearby = [];
+
+    void _load() async {
+        var res = await suggest.apiScheduleSuggest(suggest.AIScheduleSuggest(suggest.Location(-122.415336, 37.730068)));
+        setState(() {
+            nearby = res.nearby;
+            });
+        }
+
+        @mustCallSuper
+void mount(Element? parent, Object? newSlot) {
+    _load();
+}
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +60,22 @@ class _HomePageState extends State<HomeScreen> {
             myLocationEnabled: true,
             markers: _markers,
           ),
+          CarouselSlider(
+            options: CarouselOptions(height: 250, viewportFraction: 1),
+            items: images.map((i) {
+              return Builder(
+                builder: (BuildContext context) {
+                  return Container(
+                    width: MediaQuery.of(context).size.width,
+                    margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: NetworkImage(i), fit: BoxFit.cover),
+                        color: Colors.amber),
+                  );
+                },
+              );
+            }).toList(),
         ],
       ),
     );
@@ -77,22 +110,6 @@ class _HomePageState extends State<HomeScreen> {
     //           //   height: 250,
     //           //   width: 500,
     //           // ),
-    //           CarouselSlider(
-    //             options: CarouselOptions(height: 250, viewportFraction: 1),
-    //             items: images.map((i) {
-    //               return Builder(
-    //                 builder: (BuildContext context) {
-    //                   return Container(
-    //                     width: MediaQuery.of(context).size.width,
-    //                     margin: const EdgeInsets.symmetric(horizontal: 5.0),
-    //                     decoration: BoxDecoration(
-    //                         image: DecorationImage(
-    //                             image: NetworkImage(i), fit: BoxFit.cover),
-    //                         color: Colors.amber),
-    //                   );
-    //                 },
-    //               );
-    //             }).toList(),
     //           ),
     //           const Text(
     //             'guy running',
