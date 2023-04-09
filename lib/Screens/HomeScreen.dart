@@ -6,7 +6,6 @@ import 'package:pacepals/globals.dart' as globals;
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
-  
 
   List<String> images = [
     'assets/pacepalsBackground.png',
@@ -34,20 +33,27 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              const Text('Recommended',
-              style: TextStyle(color: Colors.white),),
+              const Text(
+                'Recommended',
+                style: TextStyle(color: Colors.white),
+              ),
               // Image.asset(
               //   'assets/pacepalsBackground.png',
               //   height: 250,
               //   width: 500,
               // ),
               CarouselSlider(
-                options: CarouselOptions(height: 250),
+                options: CarouselOptions(height: 250, viewportFraction: 1),
                 items: images.map((i) {
                   return Builder(
                     builder: (BuildContext context) {
                       return Container(
                         width: MediaQuery.of(context).size.width,
+                        margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: NetworkImage(i), fit: BoxFit.cover),
+                            color: Colors.amber),
                       );
                     },
                   );

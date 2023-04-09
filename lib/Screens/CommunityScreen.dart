@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'QRScanner.dart';
 
 class CommunityScreen extends StatefulWidget {
   const CommunityScreen({Key? key}) : super(key: key);
@@ -45,8 +46,15 @@ class _CommunityScreenState extends State<CommunityScreen> {
         children: [
           const Padding(
             padding: EdgeInsets.all(8.0),
-
           ),
+          ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const QRScanner()),
+                );
+              },
+              child: Text("Add Friends")),
           Expanded(
               child: ListView.builder(
                   itemCount: _friends.length,
