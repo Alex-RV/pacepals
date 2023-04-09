@@ -1,8 +1,4 @@
 use super::*;
-use axum::{
-    extract::{Json, State},
-    http::StatusCode,
-};
 
 pub async fn net_api_login_signup(
     State(state): State<ServerAppState>,
@@ -14,9 +10,15 @@ pub async fn net_api_login_signup(
         .map(Json)
 }
 
-// [ ] /api/cfg/get
-// [ ] /api/cfg/set_public
-// [ ] /api/cfg/set_private
+pub async fn net_api_login_auth(
+    State(state): State<ServerAppState>,
+    Json(req): Json<AILoginAuth>,
+) -> Result<Json<AOLoginAuth>, StatusCode> {
+    let mut state = state.write().unwrap();
+    api_login_auth(&mut state, req)
+        .ok_or(StatusCode::INTERNAL_SERVER_ERROR)
+        .map(Json)
+}
 
 pub async fn net_api_cfg_get(
     State(state): State<ServerAppState>,

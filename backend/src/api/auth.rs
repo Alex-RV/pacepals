@@ -4,13 +4,13 @@ use sha256::digest;
 use std::collections::HashMap;
 use uuid::Uuid;
 
-#[derive(Default)]
+#[derive(Serialize, Clone, Default)]
 pub struct UserSessions(HashMap<SessionId, UserId>);
 
-#[derive(Default)]
+#[derive(Serialize, Clone, Default)]
 pub struct UsersAuths(HashMap<UserId, UserAuthStore>);
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Clone, Deserialize)]
 struct UserAuthStore {
     email: String,
     hash: String,

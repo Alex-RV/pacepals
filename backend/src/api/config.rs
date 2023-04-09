@@ -1,5 +1,4 @@
 use super::*;
-use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
 #[derive(Serialize, Deserialize, Clone)]
@@ -14,8 +13,8 @@ pub struct UserPrivateConfig {
     weekly_miles: u32,
 }
 
-#[derive(Default)]
-pub struct UserConfigs(HashMap<UserId, (UserPublicConfig, UserPrivateConfig)>);
+#[derive(Serialize, Clone, Default)]
+pub struct UserConfigs(pub HashMap<UserId, (UserPublicConfig, UserPrivateConfig)>);
 
 pub struct AOConfigGet {
     public_config: UserPublicConfig,

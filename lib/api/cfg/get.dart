@@ -22,7 +22,7 @@ class AIConfigGet {
       };
 }
 
-Future<AOConfigGet> apiLoginAuth(AIConfigGet req) async {
+Future<AOConfigGet> apiConfigGet(AIConfigGet req) async {
   var url = Uri.https('pacepals-96.shuttleapp.rs', '/api/cfg/get');
   var response = await http.post(url, body: req.toJson());
   return AOConfigGet.fromJson(jsonDecode(response.body));
