@@ -78,6 +78,7 @@ pub fn api_login_signup(
         );
         Ok(AOLoginSignup {
             uid,
+            ok: true,
             ..Default::default()
         })
     } else {
@@ -104,6 +105,7 @@ pub fn api_login_auth(
         Ok(AOLoginAuth {
             uid: uid.clone(),
             sid,
+            ok: true,
             ..Default::default()
         })
     } else {
