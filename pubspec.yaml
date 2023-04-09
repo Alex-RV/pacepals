@@ -39,7 +39,8 @@ dependencies:
   flutter_session_manager: ^1.0.3
   qr_flutter: ^4.0.0
   google_nav_bar: ^5.0.6
-  
+  location: ^4.4.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
