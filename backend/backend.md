@@ -140,9 +140,11 @@ in:
 
 in:
     sid: SessionId,
-    nearby: Vec<(Directions, Location)>,
+    latitude: number,
+    longitude: number,
 
 out:
+    nearby: Vec<(Directions, Location)>,
     suggestions: Vec<{
         day_name: String,
         location: Location,
