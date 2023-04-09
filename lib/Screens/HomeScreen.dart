@@ -41,28 +41,7 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              const Text('Recommended'),
-              // Image.asset(
-              //   'assets/pacepalsBackground.png',
-              //   height: 250,
-              //   width: 500,
-              // ),
-              CarouselSlider(
-                options: CarouselOptions(height: 250),
-                items: images.map((i) {
-                  return Builder(
-                    builder: (BuildContext context) {
-                      return Container(
-                        width: MediaQuery.of(context).size.width,
-                      );
-                    },
-                  );
-                }).toList(),
-              ),
-              const Text(
-                'guy running',
-                textAlign: TextAlign.center,
-              )
+              
             ],
           ),
         ),
