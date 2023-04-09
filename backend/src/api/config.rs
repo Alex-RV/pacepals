@@ -68,9 +68,14 @@ pub fn api_cfg_set_public(
     state: &mut AppState,
     req: AIConfigSetPublic,
 ) -> Result<AOConfigSetPublic, &'static str> {
-    eprintln!("api_cfg_set_public");
+    log::warn!("api_cfg_set_public >{}<", req.sid);
     let uid = get_with_session(state, req.sid)?;
-    state.user_configs.0.get_mut(&uid).unwrap().0 = req.config;
+    state
+        .user_configs
+        .0
+        .get_mut(&uid)
+        .ok_or("User does not exist")?
+        .0 = req.config;
     Ok(AOConfigSetPublic {
         ok: true,
         error: "",

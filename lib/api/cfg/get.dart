@@ -10,8 +10,8 @@ class AOConfigGet {
   UserPrivateConfig privateConfig;
 
   AOConfigGet.fromJson(Map<String, dynamic> json)
-      : publicConfig = json['public_config'],
-        privateConfig = json['private_config'],
+      : publicConfig = UserPublicConfig.fromJson(json['public_config']),
+        privateConfig = UserPrivateConfig.fromJson(json['private_config']),
         ok = json['ok'],
         error = json['error'];
 }

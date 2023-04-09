@@ -59,23 +59,33 @@ fn create_user_hash(email: &str, password: &str) -> String {
 }
 
 pub fn api_login_signup(
-    AppState { user_auths, .. }: &mut AppState,
+    state: &mut AppState,
     req: AILoginSignup,
 ) -> Result<AOLoginSignup, &'static str> {
     log::warn!("api_login_signup");
-    if !user_auths
+    if !state
+        .user_auths
         .0
         .values()
         .any(|auth_store| auth_store.email == req.email)
     {
         let uid = Uuid::new_v4().to_string();
-        user_auths.0.insert(
+        state.user_auths.0.insert(
             uid.clone(),
             UserAuthStore {
                 hash: create_user_hash(&req.email, &req.password),
                 email: req.email,
             },
         );
+        state.user_configs.0.insert(
+            uid.clone(),
+            (UserPublicConfig::default(), UserPrivateConfig::default()),
+        );
+        state
+            .user_connections
+            .0
+            .insert(uid.clone(), UserFriends::default());
+
         Ok(AOLoginSignup {
             uid,
             ok: true,

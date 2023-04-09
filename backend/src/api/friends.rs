@@ -2,9 +2,9 @@ use super::*;
 use std::collections::HashMap;
 
 #[derive(Serialize, Clone, Default)]
-pub struct UserConnections(HashMap<UserId, UserFriends>);
+pub struct UserConnections(pub HashMap<UserId, UserFriends>);
 
-#[derive(Serialize, Clone)]
+#[derive(Serialize, Clone, Default)]
 pub struct UserFriends {
     pending_sent: Vec<UserId>,
     friends: Vec<UserId>,
