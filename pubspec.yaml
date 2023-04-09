@@ -39,9 +39,16 @@ dependencies:
   flutter_session_manager: ^1.0.3
   qr_flutter: ^4.0.0
   google_nav_bar: ^5.0.6
+<<<<<<< Updated upstream
   carousel_slider: ^4.2.1
   location: ^4.4.0
   
+=======
+  location: ^4.4.0
+  carousel_slider: ^4.2.1
+  google_maps_flutter: ^2.2.5
+
+>>>>>>> Stashed changes
 dev_dependencies:
   flutter_test:
     sdk: flutter
