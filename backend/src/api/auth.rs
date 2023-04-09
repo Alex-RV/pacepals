@@ -86,7 +86,7 @@ pub fn api_login_auth(
     if let Some((uid, _)) = user_auths
         .0
         .iter()
-        .find(|(_, auth_store)| auth_store.hash == create_user_hash(&req.email, &req.email))
+        .find(|(_, auth_store)| auth_store.hash == create_user_hash(&req.email, &req.password))
     {
         let sid = Uuid::new_v4().to_string();
         user_sessions.0.insert(sid.clone(), uid.clone());
