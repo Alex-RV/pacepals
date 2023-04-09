@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pacepals/globals.dart' as globals;
 import 'package:qr_flutter/qr_flutter.dart';
-
+import 'package:auto_size_text/auto_size_text.dart';
 import 'SignInScreen.dart';
 
 class SettingScreen extends StatefulWidget {
@@ -39,13 +39,19 @@ class _SettingScreenState extends State<SettingScreen> {
                     ),
                   ),
                   child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
                       Text("Name: ", style: TextStyle(color: Colors.white, fontSize: 36)),
                       //User name
-                      Text(globals.fullname, style: TextStyle(color: Colors.white, fontSize: 36))
-                    ],
+                      Flexible(
+                        child: AutoSizeText(
+                          globals.fullname,
+                          style: TextStyle(fontSize: 30, color: Colors.white),
+                          maxLines: 1,
+                        ),
+                      ),
+                      ],
                   ),
                 ),
                 Container(
@@ -59,12 +65,18 @@ class _SettingScreenState extends State<SettingScreen> {
                     ),
                   ),
                   child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
                       Text("Email: ", style: TextStyle(color: Colors.white, fontSize: 36)),
                       //User email
-                      Text(globals.email, style: TextStyle(color: Colors.white, fontSize: 36))
+                      Flexible(
+                        child: AutoSizeText(
+                          globals.email,
+                          style: TextStyle(fontSize: 30, color: Colors.white),
+                          maxLines: 1,
+                        ),
+                      ),
                     ],
                   ),
                 ),
