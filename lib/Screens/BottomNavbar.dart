@@ -3,9 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'HomeScreen.dart';
-import 'RunScreen.dart';
-import 'SettingScreen.dart';
-import 'CommunityScreen.dart';
 
 void main() => runApp(const BottomNavBar());
 
@@ -30,11 +27,11 @@ class _BottomNavBar extends State<BottomNavBar> {
     if (_currentIndex == 0) {
       currentScreen = HomeScreen();
     } else if (_currentIndex == 1) {
-      currentScreen = const CommunityScreen();
+      currentScreen = HomeScreen();
     } else if (_currentIndex == 2) {
-      currentScreen = const RunScreen();
+      currentScreen = HomeScreen();
     } else {
-      currentScreen = const SettingScreen();
+      currentScreen = HomeScreen();
     }
 
     return Scaffold(
@@ -49,7 +46,10 @@ class _BottomNavBar extends State<BottomNavBar> {
               activeColor: Colors.white,
               tabBackgroundColor: Colors.green.shade700,
               gap: 8,
-              padding: const EdgeInsets.all(16),
+              onTabChange: (index) {
+                print(index);
+              },
+              padding: EdgeInsets.all(16),
               tabs: const [
                 GButton(icon: Icons.home, text: "Home"),
                 GButton(icon: Icons.people, text: 'Community'),
