@@ -8,6 +8,7 @@ import 'package:pacepals/api/login/auth.dart';
 import 'HomeScreen.dart';
 import 'SignInScreen.dart';
 import 'package:pacepals/api/login/signup.dart';
+import 'GetPermissionsScreen.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -40,7 +41,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       await session.set("email", email);
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => HomeScreen()),
+        MaterialPageRoute(builder: (context) => GetPermissionsScreen()),
       );
     } catch (e) {
       print('Something went wront $e');
