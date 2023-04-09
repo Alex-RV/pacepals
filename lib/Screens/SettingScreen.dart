@@ -39,7 +39,16 @@ class _SettingScreenState extends State<SettingScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Row(
+                Container(
+                  decoration: const BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide( //                    <--- top side
+                        color: Colors.black,
+                        width: 3.0,
+                      ),
+                    ),
+                  ),
+                  child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
@@ -58,8 +67,16 @@ class _SettingScreenState extends State<SettingScreen> {
                       },
                     ),
                   ],
-                ),
-                Center(
+                ),),
+                Container(
+                  decoration: const BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide( //                    <--- top side
+                        color: Colors.black,
+                        width: 3.0,
+                      ),
+                    ),
+                  ),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -81,7 +98,16 @@ class _SettingScreenState extends State<SettingScreen> {
                     ],
                   ),
                 ),
-                Column(
+                Container(
+                  decoration: const BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide( //                    <--- top side
+                        color: Colors.black,
+                        width: 3.0,
+                      ),
+                    ),
+                  ),
+                  child: Column(
                   children: <Widget>[
                     const Text("QR Code"),
                     //User email
@@ -102,7 +128,8 @@ class _SettingScreenState extends State<SettingScreen> {
                       },
                     ),
                   ],
-                ),
+                ),),
+                
                 ElevatedButton(
                   onPressed: () async {
                     await SessionManager().destroy();
