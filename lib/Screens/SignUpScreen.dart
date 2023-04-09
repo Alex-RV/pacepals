@@ -2,8 +2,12 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:pacepals/api/cfg/set_public.dart';
+import 'package:pacepals/api/login/auth.dart';
 
 import 'SignInScreen.dart';
+import 'package:pacepals/api/login/signup.dart';
+import 'package:pacepals/api/login/auth.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -17,15 +21,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   final _formKey = GlobalKey<FormState>();
 
-  void _handleLogin() {
-    String userName = nameController.text;
+  void _handleLogin() async {
+    String email = nameController.text;
     String password = passwordController.text;
     String fullname = fullnameController.text;
-
-    // validation and login logic here
-
-    print("User Name: $userName");
-    print("Password: $password");
+    
+    await apiLoginSignup(AILoginSignup(email, password));
+    var res = await apiLoginAuth(AILoginAuth(email, password));
+    // res.
   }
 
   @override

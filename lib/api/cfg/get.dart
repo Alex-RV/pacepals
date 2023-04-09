@@ -24,6 +24,11 @@ class AIConfigGet {
 
 Future<AOConfigGet> apiConfigGet(AIConfigGet req) async {
   var url = Uri.https('pacepals-961.shuttleapp.rs', '/api/cfg/get');
-  var response = await http.post(url, body: req.toJson());
+  var headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+  };
+  var response =
+      await http.post(url, body: jsonEncode(req.toJson()), headers: headers);
   return AOConfigGet.fromJson(jsonDecode(response.body));
 }
