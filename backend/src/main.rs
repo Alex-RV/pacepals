@@ -1,11 +1,9 @@
 use axum::{
     extract::{Json, State},
-    http::{Method, Request, Response},
     routing::{get, post},
     Router,
 };
 use std::sync::{Arc, RwLock};
-use tower_http::cors::{Any, CorsLayer};
 
 mod api;
 mod debug;
@@ -36,6 +34,7 @@ async fn axum() -> shuttle_axum::ShuttleAxum {
         .route("/api/cfg/set_private", post(net_api_cfg_set_private))
         .route("/api/fr/lookup", post(net_api_fr_lookup))
         .route("/api/fr/get", post(net_api_fr_get))
+        .route("/api/fr/add", post(net_api_fr_add))
         .with_state(state);
     Ok(router.into())
 }

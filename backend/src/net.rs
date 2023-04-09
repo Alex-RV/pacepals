@@ -104,3 +104,17 @@ pub async fn net_api_fr_get(
         }),
     }
 }
+
+pub async fn net_api_fr_add(
+    State(state): State<ServerAppState>,
+    Json(req): Json<AIFriendAdd>,
+) -> Json<AOFriendAdd> {
+    let mut state = state.write().unwrap();
+    match api_fr_add(&mut state, req) {
+        Ok(r) => Json(r),
+        Err(err) => Json(AOFriendAdd {
+            ok: false,
+            error: err,
+        }),
+    }
+}

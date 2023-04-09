@@ -14,7 +14,7 @@ type SessionId = String;
 type InviteId = String;
 type EventId = String;
 
-#[derive(Serialize, Clone, Default)]
+#[derive(Serialize, Clone, Default, Debug)]
 pub struct AppState {
     user_auths: UsersAuths,
     user_sessions: UserSessions,
