@@ -4,6 +4,9 @@ import 'package:pacepals/Screens/CommunityScreen.dart';
 import 'package:pacepals/Screens/RunScreen.dart';
 import 'package:pacepals/Screens/SettingScreen.dart';
 import 'HomeScreen.dart';
+import 'RunScreen.dart';
+import 'SettingScreen.dart';
+import 'CommunityScreen.dart';
 
 void main() => runApp(const BottomNavBar());
 
