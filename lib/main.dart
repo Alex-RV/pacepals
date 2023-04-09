@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:flutter/material.dart';
 import 'Screens/SignInScreen.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
           return const MaterialApp(
               home: Scaffold(body: CircularProgressIndicator()));
         } else {
-          bool isLoggedIn = true;
+          bool isLoggedIn = snapshot.data ?? false;
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',

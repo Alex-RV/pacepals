@@ -106,7 +106,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 ElevatedButton(
                   onPressed: () async {
                     await SessionManager().destroy();
-                      Navigator.of(context).pushAndRemoveUntil(
+                    Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(builder: (context) => SignInScreen()),
                       (Route<dynamic> route) => false,
                     );
