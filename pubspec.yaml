@@ -41,6 +41,8 @@ dependencies:
   google_nav_bar: ^5.0.6
   location: ^4.4.0
   carousel_slider: ^4.2.1
+  google_maps_flutter: ^2.2.5
+  json_serializable: ^6.6.1
 
 dev_dependencies:
   flutter_test:

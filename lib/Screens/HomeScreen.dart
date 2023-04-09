@@ -2,6 +2,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_session_manager/flutter_session_manager.dart';
+import '../Widgets/StaticMaps.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -62,7 +63,7 @@ class HomeScreen extends StatelessWidget {
               const Text(
                 'guy running',
                 textAlign: TextAlign.center,
-              )
+              ),
             ],
           ),
         ),

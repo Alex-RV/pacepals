@@ -4,7 +4,7 @@ class UserPublicConfig {
   final String profilePicture;
 
   UserPublicConfig(this.name, this.profile, this.profilePicture);
-  UserPublicConfig.toJson(Map<String, dynamic> json)
+  UserPublicConfig.fromJson(Map<String, dynamic> json)
       : name = json['name'],
         profile = json['profile'],
         profilePicture = json['profile_picture'];

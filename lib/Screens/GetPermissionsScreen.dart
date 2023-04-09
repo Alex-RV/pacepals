@@ -16,11 +16,27 @@ class _GetPermissionsScreenState extends State<GetPermissionsScreen> {
 //         MaterialPageRoute(builder: (context) => HomeScreen()),
 //       );
 
+  @mustCallSuper
+  void mount(Element? parent, Object? newSlot) async {
+    print("yo, where do button");
+    setLocation();
+  }
+
+  _handlePress() async {
+    setLocation();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-        backgroundColor: Colors.transparent,
-        body: Text('GetPermissions Screen'));
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: TextButton(
+        onPressed: () {
+          _handlePress();
+        },
+        child: const Text("Try to Get Location"),
+      ),
+    );
   }
 }
 
