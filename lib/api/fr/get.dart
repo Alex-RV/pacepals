@@ -22,7 +22,7 @@ class AIFriendGet {
 }
 
 Future<AOFriendGet> apiFriendsLookUp(AIFriendGet req) async {
-  var url = Uri.https('pacepals-96.shuttleapp.rs', '/api/fr/get');
+  var url = Uri.https('pacepals-961.shuttleapp.rs', '/api/fr/get');
   var response = await http.post(url, body: req.toJson());
   return AOFriendGet.fromJson(jsonDecode(response.body));
 }

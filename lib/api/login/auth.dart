@@ -24,7 +24,7 @@ class AILoginAuth {
 }
 
 Future<AOLoginAuth> apiLoginAuth(AILoginAuth req) async {
-  var url = Uri.https('pacepals-96.shuttleapp.rs', '/api/login/auth');
+  var url = Uri.https('pacepals-961.shuttleapp.rs', '/api/login/auth');
   var response = await http.post(url, body: req.toJson());
   return AOLoginAuth.fromJson(jsonDecode(response.body));
 }
