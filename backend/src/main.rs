@@ -1,9 +1,11 @@
 use axum::{
     extract::{Json, State},
+    http::{Method, Request, Response},
     routing::{get, post},
     Router,
 };
 use std::sync::{Arc, RwLock};
+use tower_http::cors::{Any, CorsLayer};
 
 mod api;
 mod debug;

@@ -17,7 +17,7 @@ class AIConfigSetPublic {
   final SessionId sid;
 
   AIConfigSetPublic(this.sid, this.config);
-  Map<String, dynamic> toJson() => {'sid': sid, 'config': jsonEncode(config.toJson())};
+  Map<String, dynamic> toJson() => {'sid': sid, 'config': config.toJson()};
 }
 
 Future<AOConfigSetPublic> apiConfigSetPublic(AIConfigSetPublic req) async {
@@ -30,3 +30,4 @@ Future<AOConfigSetPublic> apiConfigSetPublic(AIConfigSetPublic req) async {
       await http.post(url, body: jsonEncode(req.toJson()), headers: headers);
   return AOConfigSetPublic.fromJson(jsonDecode(response.body));
 }
+

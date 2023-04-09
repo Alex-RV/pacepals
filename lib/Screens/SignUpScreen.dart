@@ -35,11 +35,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
       if (!resSignIn.ok) {
         throw resSignIn.error;
       }
-      var resSetImg = await apiConfigSetPublic(AIConfigSetPublic(resSignIn.sid,
-          UserPublicConfig(fullname, "", "assets/profileDefaultPicture.svg")));
-      if (!resSetImg.ok) {
-        throw resSetImg.error;
-      }
+      // var resSetImg = await apiConfigSetPublic(AIConfigSetPublic(resSignIn.sid,
+      //     UserPublicConfig(fullname, "", "assets/profileDefaultPicture.svg")));
+      // if (!resSetImg.ok) {
+      //   throw resSetImg.error;
+      // }
       var session = SessionManager();
       await session.set("uid", resSignIn.uid);
       await session.set("sid", resSignIn.sid);
