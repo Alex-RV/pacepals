@@ -12,7 +12,7 @@ void main() {
 // ignore: must_be_immutable
 class MyApp extends StatelessWidget {
   MyApp({super.key});
-
+  static const primaryColor = Color(0xFF151026);
   bool isLoggedIn = false;
 
   // This widget is the root of your application.
@@ -21,7 +21,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
-        theme: ThemeData(primarySwatch: Colors.blue),
+        theme: ThemeData(
+          primaryColor: primaryColor 
+        ),
         home: isLoggedIn == true ? SignInScreen() : const BottomNavBar());
   }
 }

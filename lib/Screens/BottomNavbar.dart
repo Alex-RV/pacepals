@@ -79,7 +79,7 @@ class _BottomNavbar extends State<BottomNavbarState> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
+        selectedItemColor: Colors.green,
         onTap: _onItemTapped,
       ),
     );
