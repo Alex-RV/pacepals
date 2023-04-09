@@ -54,6 +54,7 @@ pub fn api_login_signup(
     AppState { user_auths, .. }: &mut AppState,
     req: AILoginSignup,
 ) -> Option<AOLoginSignup> {
+    eprintln!("api_login_signup");
     if !user_auths
         .0
         .values()
@@ -81,6 +82,7 @@ pub fn api_login_auth(
     }: &mut AppState,
     req: AILoginAuth,
 ) -> Option<AOLoginAuth> {
+    eprintln!("api_login_auth");
     if let Some((uid, _)) = user_auths
         .0
         .iter()

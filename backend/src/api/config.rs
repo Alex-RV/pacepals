@@ -45,6 +45,7 @@ pub fn api_cfg_get(state: &AppState, req: AIConfigGet) -> Option<AOConfigGet> {
 }
 
 pub fn api_cfg_set_public(state: &mut AppState, req: AIConfigSetPublic) -> Option<()> {
+    eprintln!("api_cfg_set_public");
     let uid = get_with_session(state, req.sid)?;
     state.user_configs.0.get_mut(&uid).unwrap().0 = req.config;
     Some(())
