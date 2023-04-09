@@ -1,13 +1,19 @@
 // ignore: file_names
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_session_manager/flutter_session_manager.dart';
-import 'package:qr_flutter/qr_flutter.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  HomeScreen({Key? key}) : super(key: key);
   Future<String> getFullname() async {
     return await SessionManager().get("fullname");
   }
+
+  List<String> images = [
+    'assets/pacepalsBackground.png',
+    'assets/runningIcon.png'
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,10 +42,22 @@ class HomeScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               const Text('Recommended'),
-              Image.asset(
-                'assets/pacepalsBackground.png',
-                height: 250,
-                width: 500,
+              // Image.asset(
+              //   'assets/pacepalsBackground.png',
+              //   height: 250,
+              //   width: 500,
+              // ),
+              CarouselSlider(
+                options: CarouselOptions(height: 250),
+                items: images.map((i) {
+                  return Builder(
+                    builder: (BuildContext context) {
+                      return Container(
+                        width: MediaQuery.of(context).size.width,
+                      );
+                    },
+                  );
+                }).toList(),
               ),
               const Text(
                 'guy running',
