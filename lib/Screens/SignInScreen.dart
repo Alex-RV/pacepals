@@ -23,11 +23,17 @@ class _SignInScreenState extends State<SignInScreen> {
     String password = passwordController.text;
 
     try {
-      var res = await apiLoginAuth(AILoginAuth(email, password));
-      var data = await apiConfigGet(AIConfigGet(res.sid));
+      var resSignIn = await apiLoginAuth(AILoginAuth(email, password));
+      if (!resSignIn.ok) {
+        throw resSignIn.error;
+      }
+      var data = await apiConfigGet(AIConfigGet(resSignIn.sid));
+      if (!data.ok) {
+        throw data.error;
+      }
       var session = SessionManager();
-      await session.set("uid", res.uid);
-      await session.set("sid", res.sid);
+      await session.set("uid", resSignIn.uid);
+      await session.set("sid", resSignIn.sid);
       await session.set("fullname", data.publicConfig.name);
       await session.set("email", email);
       Navigator.push(
