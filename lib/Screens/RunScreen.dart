@@ -42,10 +42,10 @@ class _RunScreenState extends State<RunScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: const Color(0xFF191414),
       appBar: AppBar(
-        backgroundColor: Colors.black,
-        foregroundColor: Colors.green,
+        backgroundColor: const Color(0xFF191414),
+        foregroundColor: const Color(0xFF1DB954),
         centerTitle: true,
         title: const Text("Run"),
       ),
