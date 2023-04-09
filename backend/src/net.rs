@@ -118,3 +118,14 @@ pub async fn net_api_fr_add(
         }),
     }
 }
+
+pub async fn net_api_sch_suggest(Json(req): Json<AIScheduleSuggest>) -> Json<AOScheduleSuggest> {
+    match api_sch_suggest(req).await {
+        Ok(r) => Json(r),
+        Err(err) => Json(AOScheduleSuggest {
+            ok: false,
+            error: err,
+            ..Default::default()
+        }),
+    }
+}

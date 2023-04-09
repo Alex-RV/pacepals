@@ -45,6 +45,7 @@ dependencies:
   flutter_session_manager: ^1.0.3
   qr_code_scanner: ^1.0.1
   auto_size_text: ^3.0.0
+  google_maps: ^6.2.0
 
 dev_dependencies:
   flutter_test:

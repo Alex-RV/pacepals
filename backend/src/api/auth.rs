@@ -119,6 +119,6 @@ pub fn api_login_auth(
             ..Default::default()
         })
     } else {
-        Err("This user does exist")
+        Err("This user does not exist")
     }
 }

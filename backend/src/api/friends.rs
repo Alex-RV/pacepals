@@ -157,7 +157,7 @@ fn test_friends() {
     let richy = "b";
     let richy_p = "extensdsdatsrsruns";
 
-    let mut state = AppState::default();
+    let mut state = AppState::new();
 
     let res_a = api_login_signup(
         &mut state,

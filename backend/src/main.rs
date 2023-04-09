@@ -22,7 +22,7 @@ type ServerAppState = Arc<RwLock<AppState>>;
 
 #[shuttle_runtime::main]
 async fn axum() -> shuttle_axum::ShuttleAxum {
-    let state = Arc::new(RwLock::new(AppState::default()));
+    let state = Arc::new(RwLock::new(AppState::new()));
 
     let router = Router::new()
         .route("/hello", get(hello_world))
@@ -35,6 +35,7 @@ async fn axum() -> shuttle_axum::ShuttleAxum {
         .route("/api/fr/lookup", post(net_api_fr_lookup))
         .route("/api/fr/get", post(net_api_fr_get))
         .route("/api/fr/add", post(net_api_fr_add))
+        .route("/api/sch/suggest", post(net_api_sch_suggest))
         .with_state(state);
     Ok(router.into())
 }

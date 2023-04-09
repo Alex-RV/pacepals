@@ -286,7 +286,7 @@ in:
 
 [x] /api/fr/lookup
 [x] /api/fr/get
-[ ] /api/fr/add
+[x] /api/fr/add
 
 [ ] /api/invite/get
 [ ] /api/invite/notify_get
