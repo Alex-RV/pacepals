@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'HomeScreen.dart';
@@ -47,15 +49,12 @@ class _BottomNavBar extends State<BottomNavBar> {
               activeColor: Colors.white,
               tabBackgroundColor: Colors.green.shade700,
               gap: 8,
-              onTabChange: (index) {
-                print(index);
-              },
               padding: const EdgeInsets.all(16),
               tabs: const [
-                GButton(icon: Icons.home, text: "home"),
-                GButton(icon: Icons.people, text: 'community'),
-                GButton(icon: Icons.run_circle, text: 'run'),
-                GButton(icon: Icons.settings, text: 'settings')
+                GButton(icon: Icons.home, text: "Home"),
+                GButton(icon: Icons.people, text: 'Community'),
+                GButton(icon: Icons.run_circle, text: 'Run'),
+                GButton(icon: Icons.settings, text: 'Settings')
               ]),
         ),
       ),
