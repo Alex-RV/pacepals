@@ -1,13 +1,13 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_session_manager/flutter_session_manager.dart';
+import 'package:pacepals/api/cfg/def.dart';
 import 'package:pacepals/api/cfg/set_public.dart';
 import 'package:pacepals/api/login/auth.dart';
-
+import 'HomeScreen.dart';
 import 'SignInScreen.dart';
 import 'package:pacepals/api/login/signup.dart';
-import 'package:pacepals/api/login/auth.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -25,10 +25,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
     String email = nameController.text;
     String password = passwordController.text;
     String fullname = fullnameController.text;
-    
-    await apiLoginSignup(AILoginSignup(email, password));
-    var res = await apiLoginAuth(AILoginAuth(email, password));
-    // res.
+    try {
+      await apiLoginSignup(AILoginSignup(email, password));
+      print("logS!!!! AILoginSignup");
+      var res = await apiLoginAuth(AILoginAuth(email, password));
+      print("logS!!!! AILoginAuth");
+      await apiConfigSetPublic(AIConfigSetPublic(res.sid,
+          UserPublicConfig(fullname, "", "assets/profileDefaultPicture.svg")));
+      print("logS!!!! AIConfigSetPublic");
+      var session = SessionManager();
+      await session.set("uid", res.uid);
+      await session.set("sid", res.sid);
+      await session.set("fullname", fullname);
+      await session.set("email", email);
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => HomeScreen()),
+      );
+    } catch (e) {
+      print('Something went wront $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Something went wrong')),
+      );
+    }
   }
 
   @override
