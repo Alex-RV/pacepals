@@ -22,6 +22,11 @@ class AILoginSignup {
 
 Future<AOLoginSignup> apiLoginSignup(AILoginSignup req) async {
   var url = Uri.https('pacepals-961.shuttleapp.rs', '/api/login/signup');
-  var response = await http.post(url, body: req.toJson());
+  var headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+  };
+  var response =
+      await http.post(url, body: jsonEncode(req.toJson()), headers: headers);
   return AOLoginSignup.fromJson(jsonDecode(response.body));
 }

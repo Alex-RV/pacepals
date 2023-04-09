@@ -26,6 +26,11 @@ class AIFriendLookUp {
 
 Future<AOFriendLookUp> apiFriendsLookUp(AIFriendLookUp req) async {
   var url = Uri.https('pacepals-961.shuttleapp.rs', '/api/fr/lookup');
-  var response = await http.post(url, body: req.toJson());
+  var headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+  };
+  var response =
+      await http.post(url, body: jsonEncode(req.toJson()), headers: headers);
   return AOFriendLookUp.fromJson(jsonDecode(response.body));
 }

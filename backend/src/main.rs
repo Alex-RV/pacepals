@@ -15,6 +15,7 @@ pub use debug::*;
 pub use net::*;
 
 async fn hello_world() -> &'static str {
+    log::warn!("Hello World");
     "Hello, world!"
 }
 
