@@ -1,15 +1,8 @@
-import 'dart:ffi';
-import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:flutter/material.dart';
 import 'Screens/SignInScreen.dart';
 import 'Screens/BottomNavbar.dart';
+import 'globals.dart' as globals;
 
-Future<bool> getSid() async {
-  if (await SessionManager().get("sid") != null) {
-    return true;
-  }
-  return false;
-}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -18,24 +11,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<bool>(
-      future: getSid(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const MaterialApp(
-              home: Scaffold(body: CircularProgressIndicator()));
-        } else {
-          bool isLoggedIn = snapshot.data ?? false;
-          return MaterialApp(
+    return MaterialApp(
             debugShowCheckedModeBanner: false,
-            title: 'Flutter Demo',
+            title: 'Pace Pals',
             theme: ThemeData(primaryColor: primaryColor),
-            home: isLoggedIn ? const BottomNavBar() : SignInScreen(),
+            home: globals.isLoggedIn ? const BottomNavBar() : SignInScreen(),
           );
         }
-      },
-    );
-  }
 }
 
 void main() {

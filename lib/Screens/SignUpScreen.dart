@@ -1,5 +1,5 @@
 import 'dart:ui';
-
+import 'package:pacepals/globals.dart' as globals;
 import 'package:flutter/material.dart';
 import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:pacepals/api/cfg/def.dart';
@@ -39,11 +39,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
       // if (!resSetImg.ok) {
       //   throw resSetImg.error;
       // }
-      var session = SessionManager();
-      await session.set("uid", resSignIn.uid);
-      await session.set("sid", resSignIn.sid);
-      await session.set("fullname", fullname);
-      await session.set("email", email);
+      globals.uid = resSignIn.uid;
+      globals.sid = resSignIn.sid;
+      globals.fullname = fullname;
+      globals.email = email;
+      globals.isLoggedIn = true;
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => HomeScreen()),
