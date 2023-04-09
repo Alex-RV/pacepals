@@ -42,6 +42,7 @@ class _RunScreenState extends State<RunScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
         foregroundColor: Colors.green,
@@ -54,17 +55,20 @@ class _RunScreenState extends State<RunScreen> {
           children: [
             Text(
               '$_cityName',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
             ),
             SizedBox(height: 16),
             Text(
               '$_temperature °C',
-              style: TextStyle(fontSize: 24),
+              style: TextStyle(fontSize: 24, color: Colors.white),
             ),
             SizedBox(height: 16),
             Text(
               '$_weatherDescription',
-              style: TextStyle(fontSize: 24),
+              style: TextStyle(fontSize: 24, color: Colors.white),
             ),
           ],
         ),

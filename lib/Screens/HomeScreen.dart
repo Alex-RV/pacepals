@@ -16,6 +16,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
         foregroundColor: Colors.green,
@@ -33,7 +34,8 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              const Text('Recommended'),
+              const Text('Recommended',
+              style: TextStyle(color: Colors.white),),
               // Image.asset(
               //   'assets/pacepalsBackground.png',
               //   height: 250,
@@ -54,6 +56,7 @@ class HomeScreen extends StatelessWidget {
               const Text(
                 'guy running',
                 textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.white),
               ),
             ],
           ),

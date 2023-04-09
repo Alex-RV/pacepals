@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:pacepals/globals.dart' as globals;
 import 'package:flutter/material.dart';
 import 'package:flutter_session_manager/flutter_session_manager.dart';
+import 'package:pacepals/Screens/BottomNavbar.dart';
 import 'package:pacepals/api/cfg/def.dart';
 import 'package:pacepals/api/cfg/set_public.dart';
 import 'package:pacepals/api/login/auth.dart';
@@ -46,7 +47,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       globals.isLoggedIn = true;
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => HomeScreen()),
+        MaterialPageRoute(builder: (context) => BottomNavBar()),
       );
     } catch (e) {
       print('Something went wront $e');
