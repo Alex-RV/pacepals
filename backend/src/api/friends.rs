@@ -1,10 +1,10 @@
 use super::*;
-use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
-#[derive(Default)]
+#[derive(Serialize, Clone, Default)]
 pub struct UserConnections(HashMap<UserId, UserFriends>);
 
+#[derive(Serialize, Clone)]
 pub struct UserFriends {
     pending_sent: Vec<UserId>,
     friends: Vec<UserId>,
