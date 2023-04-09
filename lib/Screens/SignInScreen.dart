@@ -1,11 +1,12 @@
 import 'dart:ui';
-import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:pacepals/api/cfg/get.dart';
 import 'package:pacepals/api/login/auth.dart';
 import 'SignUpScreen.dart';
 import 'HomeScreen.dart';
 
+import 'GetPermissionsScreen.dart';
+import 'package:pacepals/globals.dart' as globals;
 
 class SignInScreen extends StatefulWidget {
   @override
@@ -31,11 +32,11 @@ class _SignInScreenState extends State<SignInScreen> {
       if (!data.ok) {
         throw data.error;
       }
-      var session = SessionManager();
-      await session.set("uid", resSignIn.uid);
-      await session.set("sid", resSignIn.sid);
-      await session.set("fullname", data.publicConfig.name);
-      await session.set("email", email);
+      globals.uid = resSignIn.uid;
+      globals.sid = resSignIn.sid;
+      globals.fullname = data.publicConfig.name;
+      globals.email = email;
+      globals.isLoggedIn = true;
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => HomeScreen()),

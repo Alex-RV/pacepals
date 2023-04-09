@@ -1,14 +1,12 @@
 // ignore: file_names
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_session_manager/flutter_session_manager.dart';
 import '../Widgets/StaticMaps.dart';
+import 'package:pacepals/globals.dart' as globals;
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
-  Future<String> getFullname() async {
-    return await SessionManager().get("fullname");
-  }
+  
 
   List<String> images = [
     'assets/pacepalsBackground.png',
@@ -23,16 +21,6 @@ class HomeScreen extends StatelessWidget {
         foregroundColor: Colors.green,
         title: const Text("Home"),
         centerTitle: true,
-        // title: FutureBuilder<String>(
-        //   future: getFullname(),
-        //   builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-        //     if (snapshot.connectionState == ConnectionState.waiting) {
-        //       return const CircularProgressIndicator();
-        //     } else {
-        //       return Text(snapshot.data ?? '');
-        //     }
-        //   },
-        // ),
       ),
       body: Center(
           child: Container(

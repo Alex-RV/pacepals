@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_session_manager/flutter_session_manager.dart';
+import 'package:pacepals/globals.dart' as globals;
 import 'package:qr_flutter/qr_flutter.dart';
 
 import 'SignInScreen.dart';
@@ -12,18 +12,6 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
-  Future<String> getFullname() async {
-    return await SessionManager().get("fullname");
-  }
-
-  Future<String> getEmail() async {
-    return await SessionManager().get("email");
-  }
-
-  Future<String> getUid() async {
-    return await SessionManager().get("uid");
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,36 +30,28 @@ class _SettingScreenState extends State<SettingScreen> {
                 Container(
                   decoration: const BoxDecoration(
                     border: Border(
-                      bottom: BorderSide( //                    <--- top side
+                      bottom: BorderSide(
+                        //                    <--- top side
                         color: Colors.black,
                         width: 3.0,
                       ),
                     ),
                   ),
                   child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    const Text("Name: "),
-                    //User name
-                    FutureBuilder<String>(
-                      future: getFullname(),
-                      builder: (BuildContext context,
-                          AsyncSnapshot<String> snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return const CircularProgressIndicator();
-                        } else {
-                          return Text(snapshot.data ?? '');
-                        }
-                      },
-                    ),
-                  ],
-                ),),
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      const Text("Name: "),
+                      //User name
+                      Text(globals.fullname)
+                    ],
+                  ),
+                ),
                 Container(
                   decoration: const BoxDecoration(
                     border: Border(
-                      bottom: BorderSide( //                    <--- top side
+                      bottom: BorderSide(
+                        //                    <--- top side
                         color: Colors.black,
                         width: 3.0,
                       ),
@@ -83,56 +63,39 @@ class _SettingScreenState extends State<SettingScreen> {
                     children: <Widget>[
                       const Text("Email: "),
                       //User email
-                      FutureBuilder<String>(
-                        future: getEmail(),
-                        builder: (BuildContext context,
-                            AsyncSnapshot<String> snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return const CircularProgressIndicator();
-                          } else {
-                            return Text(snapshot.data ?? '');
-                          }
-                        },
-                      ),
+                      Text(globals.email)
                     ],
                   ),
                 ),
                 Container(
                   decoration: const BoxDecoration(
                     border: Border(
-                      bottom: BorderSide( //                    <--- top side
+                      bottom: BorderSide(
+                        //                    <--- top side
                         color: Colors.black,
                         width: 3.0,
                       ),
                     ),
                   ),
                   child: Column(
-                  children: <Widget>[
-                    const Text("QR Code"),
-                    //User email
-                    FutureBuilder<String>(
-                      future: getUid(),
-                      builder: (BuildContext context,
-                          AsyncSnapshot<String> snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return const CircularProgressIndicator();
-                        } else {
-                          return QrImage(
-                            data: snapshot.data ?? '',
-                            version: QrVersions.auto,
-                            size: 200.0,
-                          );
-                        }
-                      },
-                    ),
-                  ],
-                ),),
-                
+                    children: <Widget>[
+                      const Text("QR Code"),
+                      //User email
+                      QrImage(
+                        data: globals.uid,
+                        version: QrVersions.auto,
+                        size: 200.0,
+                      ),
+                    ],
+                  ),
+                ),
                 ElevatedButton(
                   onPressed: () async {
-                    await SessionManager().destroy();
+                    globals.email = "";
+                    globals.fullname = "";
+                    globals.sid = "";
+                    globals.uid = "";
+                    globals.isLoggedIn = false;
                     Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(builder: (context) => SignInScreen()),
                       (Route<dynamic> route) => false,
