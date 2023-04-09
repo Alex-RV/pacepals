@@ -16,7 +16,7 @@ pub struct UserPrivateConfig {
 #[derive(Serialize, Clone, Default)]
 pub struct UserConfigs(pub HashMap<UserId, (UserPublicConfig, UserPrivateConfig)>);
 
-#[derive(Default)]
+#[derive(Serialize, Deserialize, Default)]
 pub struct AOConfigGet {
     pub ok: bool,
     pub error: &'static str,
