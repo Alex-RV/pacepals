@@ -18,9 +18,9 @@ struct UserAuthStore {
 
 #[derive(Serialize, Deserialize, Default)]
 pub struct AOLoginSignup {
-    ok: bool,
-    error: &'static str,
-    uid: UserId,
+    pub ok: bool,
+    pub error: &'static str,
+    pub uid: UserId,
 }
 
 #[derive(Serialize, Deserialize)]
@@ -31,10 +31,10 @@ pub struct AILoginSignup {
 
 #[derive(Serialize, Deserialize, Default)]
 pub struct AOLoginAuth {
-    ok: bool,
-    error: &'static str,
-    uid: UserId,
-    sid: SessionId,
+    pub ok: bool,
+    pub error: &'static str,
+    pub uid: UserId,
+    pub sid: SessionId,
 }
 
 #[derive(Serialize, Deserialize)]

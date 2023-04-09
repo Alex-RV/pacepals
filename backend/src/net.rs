@@ -57,7 +57,6 @@ pub async fn net_api_cfg_set_public(
         Err(err) => Json(AOConfigSetPublic {
             ok: false,
             error: err,
-            ..Default::default()
         }),
     }
 }
@@ -70,6 +69,35 @@ pub async fn net_api_cfg_set_private(
     match api_cfg_set_private(&mut state, req) {
         Ok(r) => Json(r),
         Err(err) => Json(AOConfigSetPrivate {
+            ok: false,
+            error: err,
+        }),
+    }
+}
+
+pub async fn net_api_fr_lookup(
+    State(state): State<ServerAppState>,
+    Json(req): Json<AIFriendLookUp>,
+) -> Json<AOFriendLookUp> {
+    let mut state = state.write().unwrap();
+    match api_fr_lookup(&mut state, req) {
+        Ok(r) => Json(r),
+        Err(err) => Json(AOFriendLookUp {
+            ok: false,
+            error: err,
+            ..Default::default()
+        }),
+    }
+}
+
+pub async fn net_api_fr_get(
+    State(state): State<ServerAppState>,
+    Json(req): Json<AIFriendGet>,
+) -> Json<AOFriendGet> {
+    let mut state = state.write().unwrap();
+    match api_fr_get(&mut state, req) {
+        Ok(r) => Json(r),
+        Err(err) => Json(AOFriendGet {
             ok: false,
             error: err,
             ..Default::default()

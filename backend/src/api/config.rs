@@ -18,10 +18,10 @@ pub struct UserConfigs(pub HashMap<UserId, (UserPublicConfig, UserPrivateConfig)
 
 #[derive(Default)]
 pub struct AOConfigGet {
-    ok: bool,
-    error: &'static str,
-    public_config: UserPublicConfig,
-    private_config: UserPrivateConfig,
+    pub ok: bool,
+    pub error: &'static str,
+    pub public_config: UserPublicConfig,
+    pub private_config: UserPrivateConfig,
 }
 
 #[derive(Serialize, Deserialize, Clone)]
@@ -37,8 +37,8 @@ pub struct AIConfigSetPublic {
 
 #[derive(Serialize, Deserialize, Clone, Default)]
 pub struct AOConfigSetPublic {
-    ok: bool,
-    error: &'static str,
+    pub ok: bool,
+    pub error: &'static str,
 }
 
 #[derive(Serialize, Deserialize, Clone)]
@@ -49,8 +49,8 @@ pub struct AIConfigSetPrivate {
 
 #[derive(Serialize, Deserialize, Clone, Default)]
 pub struct AOConfigSetPrivate {
-    ok: bool,
-    error: &'static str,
+    pub ok: bool,
+    pub error: &'static str,
 }
 
 pub fn api_cfg_get(state: &AppState, req: AIConfigGet) -> Result<AOConfigGet, &'static str> {

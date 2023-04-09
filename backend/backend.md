@@ -282,8 +282,8 @@ in:
 [x] /api/cfg/set_public
 [x] /api/cfg/set_private
 
-[ ] /api/fr/lookup
-[ ] /api/fr/get
+[x] /api/fr/lookup
+[x] /api/fr/get
 [ ] /api/fr/add
 
 [ ] /api/invite/get

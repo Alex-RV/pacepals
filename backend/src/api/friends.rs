@@ -12,10 +12,10 @@ pub struct UserFriends {
 
 #[derive(Serialize, Deserialize, Default, Clone)]
 pub struct AOFriendLookUp {
-    ok: bool,
-    error: &'static str,
-    is_pending: bool,
-    config: UserPublicConfig,
+    pub ok: bool,
+    pub error: &'static str,
+    pub is_pending: bool,
+    pub config: UserPublicConfig,
 }
 
 #[derive(Serialize, Deserialize, Clone)]
@@ -26,10 +26,10 @@ pub struct AIFriendLookUp {
 
 #[derive(Serialize, Deserialize, Default, Clone)]
 pub struct AOFriendGet {
-    ok: bool,
-    error: &'static str,
-    pending_adds: Vec<UserId>,
-    friends: Vec<UserId>,
+    pub ok: bool,
+    pub error: &'static str,
+    pub pending_adds: Vec<UserId>,
+    pub friends: Vec<UserId>,
 }
 
 #[derive(Serialize, Deserialize, Clone)]
@@ -43,7 +43,10 @@ pub struct AIFriendAdd {
     add: UserId,
 }
 
-pub fn api_fr_lookup(state: &mut AppState, req: AIFriendLookUp) -> Result<AOFriendLookUp, String> {
+pub fn api_fr_lookup(
+    state: &mut AppState,
+    req: AIFriendLookUp,
+) -> Result<AOFriendLookUp, &'static str> {
     let self_connection = state
         .user_connections
         .0
@@ -69,7 +72,7 @@ pub fn api_fr_lookup(state: &mut AppState, req: AIFriendLookUp) -> Result<AOFrie
     })
 }
 
-pub fn api_fr_get(state: &mut AppState, req: AIFriendGet) -> Result<AOFriendGet, String> {
+pub fn api_fr_get(state: &mut AppState, req: AIFriendGet) -> Result<AOFriendGet, &'static str> {
     let uid = get_with_session(state, req.sid)?;
     let pending_adds = state
         .user_connections
@@ -95,6 +98,6 @@ pub fn api_fr_get(state: &mut AppState, req: AIFriendGet) -> Result<AOFriendGet,
     })
 }
 
-pub fn api_fr_add(state: &mut AppState, req: AIFriendGet) -> Result<AOFriendGet, String> {
+pub fn api_fr_add(state: &mut AppState, req: AIFriendGet) -> Result<AOFriendGet, &'static str> {
     todo!()
 }
