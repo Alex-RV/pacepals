@@ -27,16 +27,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
     String password = passwordController.text;
     String fullname = fullnameController.text;
     try {
-      await apiLoginSignup(AILoginSignup(email, password));
-      print("logS!!!! AILoginSignup");
-      var res = await apiLoginAuth(AILoginAuth(email, password));
-      print("logS!!!! AILoginAuth");
-      await apiConfigSetPublic(AIConfigSetPublic(res.sid,
+      var resSignup = await apiLoginSignup(AILoginSignup(email, password));
+      if (!resSignup.ok) {
+        throw resSignup.error;
+      }
+      var resSignIn = await apiLoginAuth(AILoginAuth(email, password));
+      if (!resSignIn.ok) {
+        throw resSignIn.error;
+      }
+      var resSetImg = await apiConfigSetPublic(AIConfigSetPublic(resSignIn.sid,
           UserPublicConfig(fullname, "", "assets/profileDefaultPicture.svg")));
-      print("logS!!!! AIConfigSetPublic");
+      if (!resSetImg.ok) {
+        throw resSetImg.error;
+      }
       var session = SessionManager();
-      await session.set("uid", res.uid);
-      await session.set("sid", res.sid);
+      await session.set("uid", resSignIn.uid);
+      await session.set("sid", resSignIn.sid);
       await session.set("fullname", fullname);
       await session.set("email", email);
       Navigator.push(
@@ -46,7 +52,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     } catch (e) {
       print('Something went wront $e');
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Something went wrong')),
+        SnackBar(content: Text('Something went wrong $e')),
       );
     }
   }

@@ -68,6 +68,7 @@ pub fn api_fr_lookup(
     Ok(AOFriendLookUp {
         is_pending,
         config: lookup_config,
+        ok: true,
         ..Default::default()
     })
 }
@@ -94,6 +95,7 @@ pub fn api_fr_get(state: &mut AppState, req: AIFriendGet) -> Result<AOFriendGet,
     Ok(AOFriendGet {
         pending_adds,
         friends,
+        ok: true,
         ..Default::default()
     })
 }

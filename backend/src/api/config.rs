@@ -59,6 +59,7 @@ pub fn api_cfg_get(state: &AppState, req: AIConfigGet) -> Result<AOConfigGet, &'
     Ok(AOConfigGet {
         public_config: configs.0,
         private_config: configs.1,
+        ok: true,
         ..Default::default()
     })
 }
