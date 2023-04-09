@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
             theme: ThemeData(primaryColor: primaryColor),
-            home: isLoggedIn ? SignInScreen() : const BottomNavBar(),
+            home: isLoggedIn ? const BottomNavBar() : SignInScreen(),
           );
         }
       },

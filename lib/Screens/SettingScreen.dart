@@ -27,37 +27,44 @@ class _SettingScreenState extends State<SettingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("Settings")),
+        appBar: AppBar(
+          title: const Text("Settings"),
+          backgroundColor: Colors.black,
+          foregroundColor: Colors.green,
+          centerTitle: true,
+        ),
         body: Container(
           padding: const EdgeInsets.all(10.0),
           child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Container(
-                  child: Row(
-                    children: <Widget>[
-                      Text("Name"),
-                      //User name
-                      FutureBuilder<String>(
-                        future: getFullname(),
-                        builder: (BuildContext context,
-                            AsyncSnapshot<String> snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return const CircularProgressIndicator();
-                          } else {
-                            return Text(snapshot.data ?? '');
-                          }
-                        },
-                      ),
-                    ],
-                  ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    const Text("Name"),
+                    //User name
+                    FutureBuilder<String>(
+                      future: getFullname(),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<String> snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const CircularProgressIndicator();
+                        } else {
+                          return Text(snapshot.data ?? '');
+                        }
+                      },
+                    ),
+                  ],
                 ),
-                Container(
+                Center(
                   child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Text("Email"),
+                      const Text("Email"),
                       //User email
                       FutureBuilder<String>(
                         future: getEmail(),
@@ -74,46 +81,44 @@ class _SettingScreenState extends State<SettingScreen> {
                     ],
                   ),
                 ),
-                Container(
-                  child: Column(
-                    children: <Widget>[
-                      Text("QR Code"),
-                      //User email
-                      FutureBuilder<String>(
-                        future: getUid(),
-                        builder: (BuildContext context,
-                            AsyncSnapshot<String> snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return const CircularProgressIndicator();
-                          } else {
-                            return QrImage(
-                              data: snapshot.data ?? '',
-                              version: QrVersions.auto,
-                              size: 200.0,
-                            );
-                          }
-                        },
-                      ),
-                    ],
-                  ),
+                Column(
+                  children: <Widget>[
+                    const Text("QR Code"),
+                    //User email
+                    FutureBuilder<String>(
+                      future: getUid(),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<String> snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const CircularProgressIndicator();
+                        } else {
+                          return QrImage(
+                            data: snapshot.data ?? '',
+                            version: QrVersions.auto,
+                            size: 200.0,
+                          );
+                        }
+                      },
+                    ),
+                  ],
                 ),
-                Container(
-                    child: ElevatedButton(
+                ElevatedButton(
                   onPressed: () async {
                     await SessionManager().destroy();
-                    Navigator.of(context).pushAndRemoveUntil(
+                      Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(builder: (context) => SignInScreen()),
                       (Route<dynamic> route) => false,
                     );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.red,
-                    textStyle: TextStyle(fontSize: 20),
-                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                    textStyle: const TextStyle(fontSize: 20),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 30, vertical: 10),
                   ),
-                  child: Text("Sign Out"),
-                ))
+                  child: const Text("Sign Out"),
+                )
               ]),
         ));
   }

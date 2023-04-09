@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class RunScreen extends StatefulWidget{
+class RunScreen extends StatefulWidget {
   const RunScreen({Key? key}) : super(key: key);
 
   @override
@@ -9,9 +9,14 @@ class RunScreen extends StatefulWidget{
 
 class _RunScreenState extends State<RunScreen> {
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
-
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        foregroundColor: Colors.green,
+        centerTitle: true,
+        title: const Text("Run"),
+      ),
     );
   }
 }

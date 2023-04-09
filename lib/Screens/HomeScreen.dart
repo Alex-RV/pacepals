@@ -19,17 +19,20 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.black,
+        foregroundColor: Colors.green,
+        title: const Text("Home"),
         centerTitle: true,
-        title: FutureBuilder<String>(
-          future: getFullname(),
-          builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const CircularProgressIndicator();
-            } else {
-              return Text(snapshot.data ?? '');
-            }
-          },
-        ),
+        // title: FutureBuilder<String>(
+        //   future: getFullname(),
+        //   builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+        //     if (snapshot.connectionState == ConnectionState.waiting) {
+        //       return const CircularProgressIndicator();
+        //     } else {
+        //       return Text(snapshot.data ?? '');
+        //     }
+        //   },
+        // ),
       ),
       body: Center(
           child: Container(
