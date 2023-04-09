@@ -52,7 +52,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    const Text("Name"),
+                    const Text("Name: "),
                     //User name
                     FutureBuilder<String>(
                       future: getFullname(),
@@ -81,7 +81,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      const Text("Email"),
+                      const Text("Email: "),
                       //User email
                       FutureBuilder<String>(
                         future: getEmail(),
