@@ -35,12 +35,12 @@ class _BottomNavBar extends State<BottomNavBar> {
     return Scaffold(
       body: currentScreen,
       bottomNavigationBar: Container(
-        color: Colors.black,
+        color: const Color(0xFF191414),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
           child: GNav(
-            backgroundColor: Colors.black,
-            color: Colors.green,
+            backgroundColor: const Color(0xFF191414),
+            color: const Color(0xFF1DB954),
             activeColor: Colors.white,
             tabBackgroundColor: Colors.green.shade700,
             gap: 8,
