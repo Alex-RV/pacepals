@@ -8,15 +8,15 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text("Title"),
+        title: const Text('Home'),
       ),
       body: Center(
           child: Container(
-        margin: const EdgeInsets.all(15),
+        margin: const EdgeInsets.all(25),
         padding: const EdgeInsets.all(3),
         decoration: BoxDecoration(border: Border.all(color: Colors.blueAccent)),
         child: SizedBox(
-          width: 400,
+          width: 300,
           height: 300,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -25,7 +25,7 @@ class HomeScreen extends StatelessWidget {
               Image.asset(
                 'assets/pacepalsBackground.png',
                 height: 250,
-                width: 200,
+                width: 500,
               ),
               const Text(
                 'guy running',
@@ -35,23 +35,6 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       )),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.accessibility),
-            label: 'Run',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
-          ),
-        ],
-        selectedItemColor: Colors.amber[800],
-      ),
     );
   }
 }

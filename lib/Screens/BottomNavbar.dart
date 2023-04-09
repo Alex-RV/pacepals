@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'HomeScreen.dart';
 
 void main() => runApp(const BottomNavBar());
 
 class BottomNavBar extends StatelessWidget {
-  const BottomNavBar({super.key});
+  const BottomNavBar({Key? key});
 
   static const String _title = 'Flutter Code Sample';
 
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: _title,
       home: BottomNavbarState(),
     );
@@ -17,7 +19,7 @@ class BottomNavBar extends StatelessWidget {
 }
 
 class BottomNavbarState extends StatefulWidget {
-  const BottomNavbarState({super.key});
+  const BottomNavbarState({Key? key});
 
   @override
   State<BottomNavbarState> createState() => _BottomNavbar();
@@ -28,10 +30,7 @@ class _BottomNavbar extends State<BottomNavbarState> {
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Home',
-      style: optionStyle,
-    ),
+    HomeScreen(),
     Text(
       'Index 1: Business',
       style: optionStyle,
@@ -40,6 +39,8 @@ class _BottomNavbar extends State<BottomNavbarState> {
       'Index 2: School',
       style: optionStyle,
     ),
+    Text('Index', style: optionStyle),
+    Text('Index', style: optionStyle),
   ];
 
   void _onItemTapped(int index) {
@@ -51,9 +52,6 @@ class _BottomNavbar extends State<BottomNavbarState> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('BottomNavigationBar Sample'),
-      ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
@@ -64,12 +62,20 @@ class _BottomNavbar extends State<BottomNavbarState> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
+            icon: Icon(Icons.accessibility),
+            label: 'Run',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'School',
+            icon: Icon(Icons.settings),
+            label: 'Settings',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.info),
+            label: 'Info',
           ),
         ],
         currentIndex: _selectedIndex,

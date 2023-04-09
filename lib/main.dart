@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'Screens/SignInScreen.dart';
 import 'Screens/HomeScreen.dart';
+import 'Screens/BottomNavbar.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,7 +22,6 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(primarySwatch: Colors.blue),
-        home: isLoggedIn == false ? SignInScreen() : const HomeScreen());
-        
+        home: isLoggedIn == true ? SignInScreen() : const BottomNavBar());
   }
 }
