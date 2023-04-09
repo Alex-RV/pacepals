@@ -2,30 +2,28 @@ import '../def.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-class AOFriendGet {
+class AOFriendAdd {
   final bool ok;
   final String error;
-  final List<UserId> pendingAdds;
-  final List<UserId> friends;
 
-  AOFriendGet.fromJson(Map<String, dynamic> json)
-      : pendingAdds = json['pending_adds'],
-        friends = json['friends'],
-        ok = json['ok'],
+  AOFriendAdd.fromJson(Map<String, dynamic> json)
+      : ok = json['ok'],
         error = json['error'];
 }
 
-class AIFriendGet {
+class AIFriendAdd {
   final SessionId sid;
+  final UserId add;
 
-  AIFriendGet(this.sid);
+  AIFriendAdd(this.sid, this.add);
   Map<String, dynamic> toJson() => {
         'sid': sid,
+        'add': add,
       };
 }
 
-Future<AOFriendGet> apiFriendsGet(AIFriendGet req) async {
-  var url = Uri.https('pacepals-961.shuttleapp.rs', '/api/fr/get');
+Future<AOFriendAdd> apiFriendsAdd(AIFriendAdd req) async {
+  var url = Uri.https('pacepals-961.shuttleapp.rs', '/api/fr/add');
   var headers = {
     "Accept": "application/json",
     "Content-Type": "application/json",
@@ -35,5 +33,5 @@ Future<AOFriendGet> apiFriendsGet(AIFriendGet req) async {
   };
   var response =
       await http.post(url, body: jsonEncode(req.toJson()), headers: headers);
-  return AOFriendGet.fromJson(jsonDecode(response.body));
+  return AOFriendAdd.fromJson(jsonDecode(response.body));
 }

@@ -1,19 +1,19 @@
 use super::*;
 use std::collections::HashMap;
 
-#[derive(Serialize, Deserialize, Default, Clone)]
+#[derive(Serialize, Deserialize, Default, Clone, Debug)]
 pub struct UserPublicConfig {
     name: String,
     profile: String,
     profile_picture: StaticAsset,
 }
 
-#[derive(Serialize, Deserialize, Default, Clone)]
+#[derive(Serialize, Deserialize, Default, Clone, Debug)]
 pub struct UserPrivateConfig {
     weekly_miles: u32,
 }
 
-#[derive(Serialize, Clone, Default)]
+#[derive(Serialize, Clone, Default, Debug)]
 pub struct UserConfigs(pub HashMap<UserId, (UserPublicConfig, UserPrivateConfig)>);
 
 #[derive(Serialize, Deserialize, Default)]

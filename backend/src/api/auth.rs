@@ -4,13 +4,13 @@ use sha256::digest;
 use std::collections::HashMap;
 use uuid::Uuid;
 
-#[derive(Serialize, Clone, Default)]
+#[derive(Serialize, Clone, Default, Debug)]
 pub struct UserSessions(HashMap<SessionId, UserId>);
 
-#[derive(Serialize, Clone, Default)]
+#[derive(Serialize, Clone, Default, Debug)]
 pub struct UsersAuths(HashMap<UserId, UserAuthStore>);
 
-#[derive(Serialize, Clone, Deserialize)]
+#[derive(Serialize, Clone, Deserialize, Debug)]
 struct UserAuthStore {
     email: String,
     hash: String,
@@ -25,8 +25,8 @@ pub struct AOLoginSignup {
 
 #[derive(Serialize, Deserialize)]
 pub struct AILoginSignup {
-    email: String,
-    password: String,
+    pub email: String,
+    pub password: String,
 }
 
 #[derive(Serialize, Deserialize, Default)]
@@ -39,8 +39,8 @@ pub struct AOLoginAuth {
 
 #[derive(Serialize, Deserialize)]
 pub struct AILoginAuth {
-    email: String,
-    password: String,
+    pub email: String,
+    pub password: String,
 }
 
 pub fn get_with_session(
