@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
           return const MaterialApp(
               home: Scaffold(body: CircularProgressIndicator()));
         } else {
-          bool isLoggedIn = snapshot.data ?? false;
+          bool isLoggedIn = true;
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',

@@ -30,12 +30,15 @@ class _GetPermissionsScreenState extends State<GetPermissionsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
-      body: TextButton(
+      body: Column( 
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [TextButton(
         onPressed: () {
           _handlePress();
         },
         child: const Text("Try to Get Location"),
-      ),
+      ),],)
     );
   }
 }
