@@ -29,6 +29,9 @@ async fn axum() -> shuttle_axum::ShuttleAxum {
         .route("/api/dbg/get", get(net_api_dbg_get))
         .route("/api/login/signup", post(net_api_login_signup))
         .route("/api/login/auth", post(net_api_login_auth))
+        .route("/api/cfg/get", post(net_api_cfg_get))
+        .route("/api/cfg/set_public", post(net_api_cfg_set_public))
+        .route("/api/cfg/set_private", post(net_api_cfg_set_private))
         .route("/api/fr/lookup", post(net_api_fr_lookup))
         .route("/api/fr/get", post(net_api_fr_get))
         .with_state(state);
