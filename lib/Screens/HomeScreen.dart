@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'dart:convert';
 import 'package:geocoding/geocoding.dart';
+import 'package:http/http.dart' as http;
 import 'package:geolocator/geolocator.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -15,7 +17,27 @@ class _HomePageState extends State<HomeScreen> {
   Future<Position> _getCurrentLocation() async {
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
-    return position;
+
+    var url = Uri.https('pacepals-961.shuttleapp.rs', '/api/sch/suggest');
+    var headers = {
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+      "access-control-allow-origin": "*",
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+      'Access-Control-Allow-Methods': '*',
+    };
+    var response = await http.post(url,
+        body: jsonEncode({
+          "location": {
+            "latitude": position.latitude,
+            "longitude": position.longitude,
+          }
+        }),
+        headers: headers);
+    var data = jsonDecode(response.body);
+    print(response.body);
+    data["nearby"][0]["statusCode"];
+    return data;
   }
 
   late GoogleMapController mapController;
@@ -44,6 +66,22 @@ class _HomePageState extends State<HomeScreen> {
             myLocationEnabled: true,
             markers: _markers,
           ),
+          // Positioned(
+          //   top: 16,
+          //   right: 16,
+          //   child: TextButton(
+          //     onPressed: () async {
+          //       try {
+          //         Position position = await _getCurrentLocation();
+          //         print(position);
+          //         // Do something with the position and nearby places data
+          //       } catch (e) {
+          //         print('Error getting current location and nearby places: $e');
+          //       }
+          //     },
+          //     child: Icon(Icons.location_searching),
+          //   ),
+          // ),
         ],
       ),
     );
